@@ -5,6 +5,10 @@
 
 
 
+<img src="src/main/resources/material/2.png" alt="一键生成" style="zoom:75%;" />
+
+
+
 #### 源码地址
 
 Github：https://github.com/dangweijian/easy-generator
@@ -83,11 +87,11 @@ QQ：315200140
 
 公众号留言：
 
-<img src="src/main/resources/material/9.jpg" alt="一键生成" style="zoom:50%;" />
+<img src="src/main/resources/material/9.jpg" alt="公众号" style="zoom:50%;" />
 
 #### 项目演示图
 
-<img src="src/main/resources/material/1.png" alt="一键生成" style="zoom:75%;" />
+<img src="src/main/resources/material/1.png" alt="登录" style="zoom:75%;" />
 
 
 
