@@ -41,7 +41,7 @@ Gitee：https://gitee.com/dwjian/easy-generator
 #### 使用说明
 
 1. 连接配置：要逆行生成代码的目标数据源；
-2. 代码模板：初始化的sql中已提供基础代码模板，可自行修改或新增，使用人员需求熟悉freemarker语法，参考http://freemarker.foofun.cn，文末附上内置通用变量；
+2. 代码模板：初始化的sql中已提供基础代码模板，可自行修改或新增，使用人员需求熟悉freemarker语法，参考http://freemarker.foofun.cn  文末附上内置通用变量；
 3. 项目配置：关联数据库连接，关联相关代码模板，为了生成的代码在编译器中不报错，建议关联齐全（controller、service、serviceImpl、mapper、entity、xml），因为实现类中会依赖接口；例如存在serviceImpl模板、必须要有service模板；这种模板依赖关系，代码中仅做了简单的校验（参考方法com.dwj.generator.config.generator.DwjInjectionConfig#verify），可以跟据自己需求定制；当然，你也可以重写代码模板。
 
 
