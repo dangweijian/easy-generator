@@ -5,7 +5,7 @@
 
 
 
-<img src="src/main/resources/material/2.png" alt="一键生成" style="zoom:75%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/2.png" alt="一键生成" style="zoom:75%;" />
 
 
 
@@ -87,36 +87,36 @@ QQ：315200140
 
 公众号留言：
 
-<img src="src/main/resources/material/9.jpg" alt="公众号" style="zoom:50%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/9.jpg" alt="公众号" style="zoom:50%;" />
 
 #### 项目演示图
 
-<img src="src/main/resources/material/1.png" alt="登录" style="zoom:75%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/1.png" alt="登录" style="zoom:75%;" />
 
 
 
-<img src="src/main/resources/material/2.png" alt="一键生成" style="zoom:75%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/2.png" alt="一键生成" style="zoom:75%;" />
 
 
 
-<img src="src/main/resources/material/3.png" alt="连接配置" style="zoom:75%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/3.png" alt="连接配置" style="zoom:75%;" />
 
 
 
-<img src="src/main/resources/material/4.png" alt="连接编辑" style="zoom:75%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/4.png" alt="连接编辑" style="zoom:75%;" />
 
 
 
-<img src="src/main/resources/material/5.png" alt="项目模板" style="zoom:75%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/5.png" alt="项目模板" style="zoom:75%;" />
 
 
 
-<img src="src/main/resources/material/6.png" alt="项目模板编辑" style="zoom:75%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/6.png" alt="项目模板编辑" style="zoom:75%;" />
 
 
 
-<img src="src/main/resources/material/7.png" alt="代码模板" style="zoom:75%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/7.png" alt="代码模板" style="zoom:75%;" />
 
 
 
-<img src="src/main/resources/material/8.png" alt="代码模板编辑" style="zoom:75%;" />
+<img src="https://gitee.com/dwjian/easy-generator/raw/master/src/main/resources/material/8.png" alt="代码模板编辑" style="zoom:75%;" />
