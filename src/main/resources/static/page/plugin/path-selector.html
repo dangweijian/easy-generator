@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>文件夹选择器</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/easy-generator/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/easy-generator/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="/easy-generator/css/public.css" media="all">
+    <link rel="stylesheet" href="/easy-generator/lib/eleTree/css/icon.css">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+        .path-selector {
+            height: 210px;
+            border: #C9C9C9 1px solid;
+            padding: 10px;
+            overflow:auto;
+        }
+        .path-operate {
+            height: 25px;
+            margin-top: 15px;
+        }
+        .path-operate .layui-inline{
+            width: 324px;
+            line-height: 25px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .path-operate .layui-btn{
+            height: 25px;
+            line-height: 23px;
+            position: absolute;
+            right: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-container">
+    <input type="hidden" value="" id="parentEleId"/>
+    <input type="hidden" value="" id="initPath"/>
+    <div class="path-selector"></div>
+    <div class="path-operate">
+        <label>路径：</label><div class="layui-inline" id="selectedPath"></div>
+        <div class="layui-btn layui-btn-primary" id="selectPath">选 择</div>
+    </div>
+</div>
+<script src="/easy-generator/js/common/common.js" charset="utf-8"></script>
+<script>
+    layui.use(['eleTree'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            eleTree = layui.eleTree;
+
+        //获取根路径
+        getAjax(basePath + "/api/file/path/select", {initPath: encodeURIComponent(window.parent.getRootPath())}, function (result) {
+            if(result.code === 0){
+                var el = eleTree({
+                    el: '.path-selector',
+                    data: result.data,
+                    imgUrl: basePath + "/lib/eleTree/images/",
+                    highlightCurrent: true,
+                    lazy: true,
+                    icon: {
+                        fold: "fold.png",
+                        leaf: "fold.png",
+                        dropdownOff: ".eletree_icon-dropdown_right",
+                        dropdownOn: ".eletree_icon-dropdown_bottom",
+                        loading: ".eleTree-animate-rotate.eletree_icon-loading1",
+                    },
+                    draggable: true
+                });
+
+                //加载子节点
+                el.on('lazyload', function(d) {
+                    var data = d.data;
+                    var load = d.load;
+                    getAjax(basePath + "/api/file/path/select", {basePath: encodeURIComponent(data.id)}, function (result) {
+                        if(result.code === 0){
+                            load(result.data);
+                        }
+                    });
+                });
+
+                //点击节点
+                el.on("click", function(d) {
+                    if(d.data && d.data.id){
+                        $('#selectedPath').text(d.data.id);
+                    }
+                })
+            }
+        });
+
+        //选择路径
+        $('body').on('click', '#selectPath', function () {
+            if($('#selectedPath').text()){
+                var path = $('#selectedPath').text();
+                window.parent.selectedPath($('#parentEleId').val(), path);
+                //关闭
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            }
+        })
+    });
+
+    function initParent(eleId) {
+        $('#parentEleId').val(eleId);
+    }
+</script>
+</body>
+</html>

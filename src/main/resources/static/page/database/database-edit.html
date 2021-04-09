@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>数据库编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/easy-generator/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/easy-generator/css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layui-form-pane" lay-filter="editForm" style="padding-left: 50px;padding-right: 50px">
+    <input type="hidden" name="id" value=""/>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">数据库类型</label>
+        <div class="layui-input-inline">
+            <select name="dbType" lay-filter="dbType" lay-verify="required" lay-reqtext="请选择数据库类型">
+                <option value="MYSQL">mysql</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">连接驱动</label>
+        <div class="layui-input-block">
+            <input type="text" name="drive" lay-verify="required" lay-reqtext="连接驱动不能为空" placeholder="请输入数连接驱动" value="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">数据库名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="dbName" lay-verify="required" lay-reqtext="数据库名称不能为空" placeholder="请输入数据库名称" value="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">host</label>
+        <div class="layui-input-block">
+            <input type="text" name="host" lay-verify="required" lay-reqtext="host不能为空" placeholder="请输入host" value="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">port</label>
+        <div class="layui-input-block">
+            <input type="text" name="port" lay-verify="required" lay-reqtext="port不能为空" placeholder="请输port" value="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" name="username" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输登录数据库的用户名" value="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">密码</label>
+        <div class="layui-input-block">
+            <input type="password" name="password" lay-verify="required" lay-reqtext="密码不能为空" placeholder="请输登录数据库的密码" value="" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="testConnection">测试连接</button>
+            <button id="saveBtn" class="layui-btn layui-btn-normal" lay-submit lay-filter="saveDatabase">确认保存</button>
+        </div>
+    </div>
+</div>
+<script src="/easy-generator/js/common/common.js" charset="utf-8"></script>
+<script src="/easy-generator/js/extend/database/database.js" charset="utf-8"></script>
+<script id="dataEcho">
+    layui.use(['form']);
+    function dataEcho(data, hideSaveBtn) {
+        layui.form.val("editForm", {
+            "id": data.id,
+            "dbType": data.dbType,
+            "dbName": data.dbName,
+            "drive": data.drive,
+            "host": data.host,
+            "port": data.port,
+            "username": data.username,
+            "password": data.password
+        });
+        if(hideSaveBtn && hideSaveBtn === true){
+            $('#saveBtn').hide();
+        }
+    }
+</script>
+</body>
+</html>

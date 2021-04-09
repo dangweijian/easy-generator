@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dwj.generator.dao.mapper.AdminMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dwj.generator.dao.entity.Admin">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="pasword" property="pasword" />
+        <result column="update_date" property="updateDate" />
+        <result column="create_date" property="createDate" />
+    </resultMap>
+
+</mapper>

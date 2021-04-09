@@ -1,0 +1,45 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "page/generate/generate-list.html"
+  },
+  "logoInfo": {
+    "title": "GENERATOR",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "常规配置",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "一键生成",
+          "href": "page/generate/generate-list.html",
+          "icon": "fa fa-cloud-download",
+          "target": "_self"
+        },
+        {
+          "title": "连接配置",
+          "href": "page/database/database-list.html",
+          "icon": "fa fa-sitemap",
+          "target": "_self"
+        },
+        {
+          "title": "项目模板",
+          "href": "page/project/project-list.html",
+          "icon": "fa fa-folder-open",
+          "target": "_self"
+        },
+        {
+          "title": "代码模板",
+          "href": "page/template/template-list.html",
+          "icon": "fa fa-file-code-o",
+          "target": "_self"
+        }
+      ]
+    }
+  ]
+}
