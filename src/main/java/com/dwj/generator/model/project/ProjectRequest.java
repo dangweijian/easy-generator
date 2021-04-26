@@ -14,6 +14,9 @@ import lombok.Data;
 @Data
 public class ProjectRequest extends QueryCriteria<Project, ProjectListVo> {
 
+    @Condition(type = ConditionType.EQ)
+    private Long id;
+
     @Condition(type = ConditionType.LIKE)
     private String projectName;
 
