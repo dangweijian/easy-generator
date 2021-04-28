@@ -1,5 +1,11 @@
 package com.dwj.generator.config.interceptor;
 
+import com.dwj.generator.dao.entity.Admin;
+import com.dwj.generator.service.IAdminService;
+
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -8,6 +14,11 @@ import java.util.Set;
  * @create: 2020-01-19 16:26
  **/
 public abstract class AbstractInterceptor {
+
+    protected final static Map<Long, Admin> adminCache = new HashMap<>();
+
+    @Resource
+    protected IAdminService adminService;
 
     /**
      * 拦截根目录

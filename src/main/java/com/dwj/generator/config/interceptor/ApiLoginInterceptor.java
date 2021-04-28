@@ -2,9 +2,11 @@ package com.dwj.generator.config.interceptor;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
+import com.dwj.generator.common.response.ResultEnum;
 import com.dwj.generator.common.utils.AesUtil;
 import com.dwj.generator.common.utils.SessionUtil;
 import com.dwj.generator.config.admin.AdminContextHolder;
+import com.dwj.generator.config.exception.BusinessException;
 import com.dwj.generator.controller.AdminController;
 import com.dwj.generator.dao.entity.Admin;
 import lombok.extern.slf4j.Slf4j;
@@ -18,15 +20,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @ClassName AccessInterceptor
- * @Description 访问拦截器
- * @Author dwjian
- * @Date 2021/4/8 10:49
- */
+ * @author: dangweijian
+ * @description: 接口登录拦截
+ * @create: 2021-04-28 9:27
+ **/
 @Slf4j
 @Configuration
 @ConditionalOnProperty(prefix="spring.interceptor",name = "loginInterceptor", havingValue = "true")
-public class LoginInterceptor extends AbstractInterceptor implements HandlerInterceptor {
+public class ApiLoginInterceptor extends AbstractInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request,
@@ -34,8 +35,7 @@ public class LoginInterceptor extends AbstractInterceptor implements HandlerInte
         //校验登录
         Object loginToken = SessionUtil.getSessionAttribute(AdminController.LOGIN_KEY);
         if(loginToken == null){
-            response.sendRedirect(request.getContextPath() + "/page/login.html");
-            return false;
+            throw new BusinessException(ResultEnum.NO_LOGIN);
         }
         //校验token
         Admin admin = JSONUtil.toBean(AesUtil.decrypt(AdminController.ENCRYPT_KEY, loginToken.toString()), Admin.class);
@@ -51,8 +51,7 @@ public class LoginInterceptor extends AbstractInterceptor implements HandlerInte
                         .eq(Admin::getLastLoginDate, DateUtil.format(admin.getLastLoginDate(), "yyyy-MM-dd HH:mm:ss")).one();
                 if(targetAdmin == null){
                     adminCache.remove(admin.getId());
-                    response.sendRedirect(request.getContextPath() + "/page/login.html");
-                    return false;
+                    throw new BusinessException(ResultEnum.NO_LOGIN);
                 }else {
                     adminCache.put(targetAdmin.getId(), targetAdmin);
                 }
@@ -63,8 +62,7 @@ public class LoginInterceptor extends AbstractInterceptor implements HandlerInte
                     .eq(Admin::getPassword, admin.getPassword())
                     .eq(Admin::getLastLoginDate, DateUtil.format(admin.getLastLoginDate(), "yyyy-MM-dd HH:mm:ss")).one();
             if(targetAdmin == null){
-                response.sendRedirect(request.getContextPath() + "/page/login.html");
-                return false;
+                throw new BusinessException(ResultEnum.NO_LOGIN);
             }
             adminCache.put(targetAdmin.getId(), targetAdmin);
         }
@@ -74,23 +72,18 @@ public class LoginInterceptor extends AbstractInterceptor implements HandlerInte
 
     @Override
     public String pathPatterns() {
-        return "/**";
+        return "/api/**";
     }
 
     @Override
     public Set<String> excludePathPatterns() {
         HashSet<String> pathMap = new HashSet<>();
-        pathMap.add("/page/login.html");
-        pathMap.add("/api/**");
-        pathMap.add("/css/**");
-        pathMap.add("/images/**");
-        pathMap.add("/js/**");
-        pathMap.add("/lib/**");
+        pathMap.add("/api/admin/login");
         return pathMap;
     }
 
     @Override
     public int order() {
-        return 0;
+        return 1;
     }
 }

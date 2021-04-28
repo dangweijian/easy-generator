@@ -1,5 +1,6 @@
 package com.dwj.generator.config.web;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.dwj.generator.common.utils.SpringUtil;
 import com.dwj.generator.config.interceptor.AbstractInterceptor;
 import org.springframework.context.annotation.Configuration;
@@ -24,13 +25,15 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public void addInterceptors(InterceptorRegistry registry) {
         Map<String, AbstractInterceptor> interceptorMap = SpringUtil.getBeansOfType(AbstractInterceptor.class);
         if(interceptorMap.size() > 0){
-            List<AbstractInterceptor> interceptorList = interceptorMap.values().stream().sorted(Comparator.comparing(AbstractInterceptor::order))
+            List<AbstractInterceptor> interceptorList = interceptorMap.values().stream().sorted(Comparator.comparing(AbstractInterceptor::order).reversed())
                     .collect(Collectors.toList());
             for (AbstractInterceptor interceptor : interceptorList) {
                 InterceptorRegistration interceptorRegistration = registry.addInterceptor((HandlerInterceptor) interceptor)
                         .addPathPatterns(interceptor.pathPatterns());
-                for (String excludePattern : interceptor.excludePathPatterns()) {
-                    interceptorRegistration.excludePathPatterns(excludePattern);
+                if(CollectionUtil.isNotEmpty(interceptor.excludePathPatterns())){
+                    for (String excludePattern : interceptor.excludePathPatterns()) {
+                        interceptorRegistration.excludePathPatterns(excludePattern);
+                    }
                 }
             }
         }
